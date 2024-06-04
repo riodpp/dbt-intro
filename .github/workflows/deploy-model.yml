@@ -33,8 +33,8 @@ jobs:
 
     - name: Clear remote models directory
       run: |
-        gcloud compute ssh airflow-poc --zone us-central1-a --command "rm -rf ~/dbt-intro/models/*"
+        gcloud compute ssh airflow-poc --zone us-central1-a --command "rm -rf /home/dwiputra_rio/dbt-intro/models/*"
 
     - name: Copy files to GCP VM
       run: |
-        gcloud compute scp --recurse ./models/* airflow-poc:~/dbt-intro/models --zone us-central1-a
+        gcloud compute scp --recurse ./models/* airflow-poc:/home/dwiputra_rio/dbt-intro/models --zone us-central1-a
