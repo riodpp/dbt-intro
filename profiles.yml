@@ -1,0 +1,24 @@
+dbt_intro:
+  outputs:
+    dev:
+      dataset: dbt_intro_data
+      job_execution_timeout_seconds: 300
+      job_retries: 1
+      location: US
+      method: oauth
+      priority: interactive
+      project: partnatech
+      threads: 1
+      type: bigquery
+    dev_sa:
+      dataset: dbt_intro_data
+      job_execution_timeout_seconds: 300
+      job_retries: 1
+      location: US
+      method: service-account
+      priority: interactive
+      project: partnatech
+      threads: 1
+      type: bigquery
+      keyfile: secret/keyfile.json
+  target: dev_sa
