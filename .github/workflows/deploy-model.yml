@@ -2,8 +2,15 @@ name: Deploy DAG to GCP VM
 
 on:
   push:
+    branches:
+      - main
     paths:
-      - 'models/**/*.py'  # Adjust the path according to where your DAGs are stored
+      - 'models/**/*'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'models/**/*'
 
 jobs:
   deploy:
