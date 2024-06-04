@@ -1,0 +1,24 @@
+name: Deploy DAG to GCP VM
+
+on:
+  push:
+    paths:
+      - 'models/**/*.py'  # Adjust the path according to where your DAGs are stored
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Set up Cloud SDK
+      uses: google-github-actions/setup-gcloud@v0
+      with:
+        service_account_key: ${{ secrets.GCP_SA_KEY }}
+        project_id: ${{ GCP_PROJECT_ID }}
+
+    - name: Copy files to GCP VM
+      run: |
+        gcloud compute scp ./models/* airflow-poc:/home/dwiputra_rio/dbt-intro/models --zone us-central1-a
