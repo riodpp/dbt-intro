@@ -38,4 +38,4 @@ jobs:
     - name: Copy files to GCP VM
       run: |
         gcloud compute scp --recurse ./models airflow-poc:/home/dwiputra_rio/dbt-intro/models --zone us-central1-a
-        chmod -R u=rwx,go=rwx /home/dwiputra_rio/dbt-intro/models
+        gcloud compute ssh airflow-poc --zone us-central1-a --command "chmod -R u=rwx,go=rwx /home/dwiputra_rio/dbt-intro/models"
