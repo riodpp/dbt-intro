@@ -15,5 +15,4 @@ SELECT
   start_year,
   start_month
 FROM {{ ref('citybike_trips_silver') }}
-WHERE tripduration > 60 AND tripduration < 86400
 GROUP BY start_station_name, end_station_name, start_year, start_month
