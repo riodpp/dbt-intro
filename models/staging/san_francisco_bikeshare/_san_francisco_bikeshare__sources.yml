@@ -1,0 +1,194 @@
+version: 2
+
+sources:
+  - name: san_francisco_bikeshare
+    database: bigquery-public-data
+    description: >
+      This source contains the raw data from the bikeshare trips table.
+    tables:
+      - name: bikeshare_trips
+        description: >
+          This table contains the raw data from the bikeshare trips table.
+        columns:
+          - name: trip_id
+            description: Numeric ID of bike trip
+            tests:
+              - unique
+              - not_null
+
+          - name: duration_sec
+            description: Time of trip in seconds
+
+          - name: start_date
+            description: Start date of trip with date and time, in PST
+
+          - name: start_station_name
+            description: Station name of start station
+
+          - name: start_station_id
+            description: Numeric reference for start station
+            tests:
+              - not_null
+
+          - name: end_date
+            description: End date of trip with date and time, in PST
+
+          - name: end_station_name
+            description: Station name for end station
+
+          - name: end_station_id
+            description: Numeric reference for end station
+            tests:
+              - not_null
+
+          - name: bike_number
+            description: ID of bike used
+
+          - name: zip_code
+            description: Home zip code of subscriber (customers can choose to manually enter zip at kiosk however data is unreliable)
+          
+          - name: subscriber_type
+            description: Subscriber = annual or 30-day member; Customer = 24-hour or 3-day member
+
+          - name: c_subscription_type
+            description: Subscription type of the user
+
+          - name: start_station_latitude
+            description: Latitude of the start station
+
+          - name: start_station_longitude
+            description: Longitude of the start station
+
+          - name: end_station_latitude
+            description: Latitude of the end station
+
+          - name: end_station_longitude 
+            description: Longitude of the end station
+
+          - name: member_birth_year
+            description: Birth year of the user
+          
+          - name: bike_share_for_all_trip
+            description: If the user is a member of the bike share for all program
+
+          - name: start_station_geom  
+            description: Geometry of the start station
+
+          - name: end_station_geom
+            description: Geometry of the end station
+
+      - name: bikeshare_station_info
+        description: >
+          This table contains the raw data from the bikeshare stations table.
+        columns:
+          - name: station_id
+            description: Unique identifier of a station.
+            tests:
+              - unique
+              - not_null
+
+          - name: name
+            description: Public name of the station
+
+          - name: short_name
+            description: Short name or other type of identifier, as used by the data publisher
+
+          - name: lat
+            description: >
+              The latitude of station. The field value must be a valid WGS 84 latitude in decimal degrees format. 
+              See: http://en.wikipedia.org/wiki/World_Geodetic_System, https://en.wikipedia.org/wiki/Decimal_degrees
+
+          - name: lon
+            description: >
+              The longitude of station. The field value must be a valid WGS 84 longitude in decimal degrees format. 
+              See: http://en.wikipedia.org/wiki/World_Geodetic_System, https://en.wikipedia.org/wiki/Decimal_degrees
+
+          - name: region_id
+            description: ID of the region where station is located
+
+          - name: rental_methods
+            description: >
+              Array of enumerables containing the payment methods accepted at this station. 
+              Current valid values (in CAPS) are: KEY (i.e. operator issued bike key / fob / card) 
+              CREDITCARD PAYPASS APPLEPAY ANDROIDPAY TRANSITCARD ACCOUNTNUMBER PHONE 
+              This list is intended to be as comprehensive at the time of publication as possible but is subject to change, 
+              as defined in File Requirements above
+          
+          - name: capacity
+            description: Number of total docking points installed at this station, both available and unavailable
+
+          - name: external_id
+            description: >
+              An optional field that may be used to store an identifier for the station that is unique within a given system. 
+              This field is intended to be used for record-keeping and data management purposes only and should not be used 
+              to determine station identity or availability. This field is optional and may be null.
+
+          - name: eightd_has_key_dispenser
+            description: If the station has a key dispenser
+
+          - name: has_kiosk
+            description: If the station has a kiosk 
+
+          - name: station_geom
+            description: Geometry of the station
+
+      - name: bikeshare_station_status
+        description: >
+          This table contains the raw data from the bikeshare station status table.
+        columns:
+          - name: station_id
+            description: Unique identifier of a station.
+            tests:
+              - unique
+              - not_null
+
+          - name: num_bikes_available
+            description: Number of bikes available at the station
+
+          - name: num_bikes_disabled
+            description: >
+              Number of disabled bikes at the station. Vendors who do not want to publicize the number of 
+              disabled bikes or docks in their system can opt to omit station capacity (in station_information), 
+              num_bikes_disabled and num_docks_disabled. If station capacity is published then broken docks/bikes 
+              can be inferred (though not specifically whether the decreased capacity is a broken bike or dock)
+
+          - name: num_docks_available
+            description: Number of docks accepting bike returns
+
+          - name: num_docks_disabled
+            description: >
+              Number of empty but disabled dock points at the station. 
+              This value remains as part of the spec as it is possibly useful during development
+
+          - name: is_installed
+            description: 1/0 boolean - If the station is installed
+
+          - name: is_renting
+            description: 1/0 boolean - If the station is renting
+
+          - name: is_returning
+            description: 1/0 boolean - If the station is returning
+
+          - name: last_reported
+            description: Integer POSIX timestamp indicating the last time this station reported its status to the backend
+
+          - name: num_ebikes_available
+            description: Number of electric bikes available at the station
+
+          - name: eightd_has_available_keys
+            description: If the station has available keys
+
+      - name: bikeshare_regions
+        description: >
+          This table contains the raw data from the bikeshare regions table.
+        columns:
+          - name: region_id
+            description: Unique identifier of a region.
+            tests:
+              - unique
+              - not_null
+
+          - name: name
+            description: Public name of the region
+
+          

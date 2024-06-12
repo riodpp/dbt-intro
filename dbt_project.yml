@@ -34,3 +34,11 @@ models:
     # Config indicated by + and applies to all files under models/example/
     example:
       +materialized: view
+    staging:
+      san_francisco_bikeshare:
+        +schema: stg_san_francisco_bikeshare
+        +materialized: view
+    intermediate:
+      transportation:
+        +schema: int_transportation
+

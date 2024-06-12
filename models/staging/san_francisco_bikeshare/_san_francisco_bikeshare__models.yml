@@ -1,0 +1,85 @@
+version: 2
+
+models:
+  - name: stg_san_francisco_bikeshare__bikeshare_trips
+    description: '{{ doc("bikeshare_trips") }}'
+
+    columns:
+      - name: trip_id
+        description: Numeric ID of bike trip
+        tests:
+          - unique
+          - not_null
+
+      - name: duration_sec
+        description: Time of trip in seconds
+
+      - name: start_timestamp
+        description: Start date of trip with date and time, in PST
+
+      - name: start_date
+        description: Start date of trip with date, in PST
+
+      - name: start_station_name
+        description: Station name of start station
+
+      - name: start_station_id
+        description: Numeric reference for start station
+        tests:
+          - not_null
+
+      - name: end_timestamp
+        description: End date of trip with date and time, in PST
+
+      - name: end_date
+        description: End date of trip with date, in PST
+
+      - name: end_station_name
+        description: Station name for end station
+
+      - name: end_station_id
+        description: Numeric reference for end station
+        tests:
+          - not_null
+
+      - name: bike_number
+        description: ID of bike used
+
+      - name: zip_code
+        description: Home zip code of subscriber (customers can choose to manually enter zip at kiosk however data is unreliable)
+      
+      - name: subscriber_type
+        description: Subscriber = annual or 30-day member; Customer = 24-hour or 3-day member
+
+      - name: c_subscription_type
+        description: Subscription type of the user
+
+      - name: start_station_latitude
+        description: Latitude of the start station
+
+      - name: start_station_longitude
+        description: Longitude of the start station
+
+      - name: end_station_latitude
+        description: Latitude of the end station
+
+      - name: end_station_longitude 
+        description: Longitude of the end station
+
+      - name: member_birth_year
+        description: Birth year of the user
+
+      - name: member_age
+        description: Age of the user
+
+      - name: member_age_group
+        description: Age group of the user
+      
+      - name: bike_share_for_all_trip
+        description: If the user is a member of the bike share for all program
+
+      - name: start_station_geom  
+        description: Geometry of the start station
+
+      - name: end_station_geom
+        description: Geometry of the end station
